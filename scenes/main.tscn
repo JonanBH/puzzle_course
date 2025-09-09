@@ -1,6 +1,65 @@
-[gd_scene load_steps=2 format=3 uid="uid://yf8kmxuvya5q"]
+[gd_scene load_steps=7 format=4 uid="uid://yf8kmxuvya5q"]
 
-[ext_resource type="Script" uid="uid://vl6eue3fssx2" path="res://scenes/Main.cs" id="1_o5qli"]
+[ext_resource type="Script" uid="uid://vl6eue3fssx2" path="res://scenes/Main.cs" id="1_elqb8"]
+[ext_resource type="TileSet" uid="uid://djx75upf7yrb" path="res://resources/tiles.tres" id="2_0bbpv"]
+[ext_resource type="PackedScene" uid="uid://crjgwlsm42o8k" path="res://scenes/manager/GridManager.tscn" id="2_rarhs"]
+[ext_resource type="TileSet" uid="uid://ogwhulqd657v" path="res://resources/hithglight_tileset.tres" id="2_rvslj"]
+[ext_resource type="PackedScene" uid="uid://b00e2h5de31sd" path="res://assets/building/Base.tscn" id="5_vcsgt"]
 
-[node name="Main" type="Node2D"]
-script = ExtResource("1_o5qli")
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_elqb8"]
+size = Vector2(64, 64)
+
+[node name="Main" type="Node"]
+script = ExtResource("1_elqb8")
+
+[node name="GridManager" parent="." node_paths=PackedStringArray("highlightTileMapLayer", "baseTerrainTileMapLayer") instance=ExtResource("2_rarhs")]
+highlightTileMapLayer = NodePath("../HighlightTileMapLayer")
+baseTerrainTileMapLayer = NodePath("../YSortRoot/BaseTerrainTileMapLayer")
+
+[node name="YSortRoot" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="BaseTerrainTileMapLayer" type="TileMapLayer" parent="YSortRoot"]
+y_sort_enabled = true
+tile_map_data = PackedByteArray("AAALAAMAAAAGAAAAAAAKAAMAAAAGAAEAAAAKAAIAAAAHAAAAAAAJAAIAAAAGAAEAAAAJAAEAAAAHAAAAAAAIAAEAAAAGAAAAAAAHAAEAAAAFAAAAAAAHAAIAAAAGAAEAAAAGAAIAAAAGAAAAAAAFAAIAAAAGAAAAAAAEAAIAAAAFAAAAAAADAAMAAAAFAAAAAAACAAQAAAAFAAAAAAACAAUAAAAFAAIAAAADAAUAAAAGAAEAAAADAAYAAAAFAAIAAAAEAAYAAAAGAAIAAAAFAAYAAAAGAAEAAAAFAAcAAAAFAAIAAAAGAAcAAAAGAAEAAAAGAAgAAAAFAAIAAAAHAAgAAAAGAAEAAAAHAAkAAAAFAAIAAAAIAAkAAAAGAAIAAAAJAAkAAAAHAAIAAAAJAAgAAAAGAAEAAAAKAAgAAAAHAAIAAAAKAAcAAAAGAAEAAAALAAcAAAAGAAIAAAAMAAcAAAAGAAIAAAANAAcAAAAGAAIAAAAOAAcAAAAGAAEAAAAOAAgAAAAFAAIAAAAPAAcAAAAGAAEAAAAPAAYAAAAGAAEAAAAPAAUAAAAHAAEAAAAPAAQAAAAHAAAAAAAOAAQAAAAGAAAAAAANAAQAAAAGAAEAAAANAAMAAAAHAAAAAAAMAAMAAAAGAAAAAAAMAAQAAAAGAAEAAAAOAAUAAAAGAAEAAAAOAAYAAAAGAAEAAAANAAYAAAAGAAEAAAANAAUAAAAGAAEAAAAMAAUAAAAGAAEAAAAMAAYAAAAGAAEAAAALAAYAAAAGAAEAAAALAAUAAAAGAAEAAAALAAQAAAAGAAEAAAAKAAUAAAAGAAEAAAAKAAYAAAAGAAEAAAAKAAQAAAAGAAEAAAAJAAcAAAAGAAEAAAAJAAYAAAAGAAEAAAAJAAUAAAAGAAEAAAAJAAQAAAAGAAEAAAAJAAMAAAAGAAEAAAAIAAgAAAAGAAEAAAAIAAcAAAAGAAEAAAAIAAYAAAAGAAEAAAAIAAUAAAAGAAEAAAAIAAQAAAAGAAEAAAAIAAMAAAAGAAEAAAAIAAIAAAAGAAEAAAAHAAcAAAAGAAEAAAAHAAYAAAAGAAEAAAAHAAUAAAAGAAEAAAAHAAQAAAAGAAEAAAAHAAMAAAAGAAEAAAAGAAYAAAAGAAEAAAAGAAUAAAAGAAEAAAAGAAQAAAAGAAEAAAAGAAMAAAAGAAEAAAAFAAUAAAAGAAEAAAAFAAQAAAAGAAEAAAAFAAMAAAAGAAEAAAAEAAUAAAAGAAEAAAAEAAQAAAAGAAEAAAAEAAMAAAAGAAEAAAADAAQAAAAGAAEAAAAPAAgAAAAGAAIAAAAQAAgAAAAHAAIAAAAQAAcAAAAHAAEAAAAQAAYAAAAHAAAAAAA=")
+tile_set = ExtResource("2_0bbpv")
+
+[node name="ResourceTileMapLayer" type="TileMapLayer" parent="YSortRoot/BaseTerrainTileMapLayer"]
+y_sort_enabled = true
+tile_map_data = PackedByteArray("AAAIAAIAAQAAAAAAAAAJAAIAAQAAAAAAAAAIAAMAAQAAAAAAAAAJAAMAAQAAAAAAAAAKAAMAAQAAAAAAAAAKAAQAAQAAAAAAAAALAAQAAQAAAAAAAAAHAAgAAQAAAAAAAAAIAAgAAQAAAAAAAAAIAAkAAQAAAAAAAAAGAAcAAQAAAAAAAAA=")
+tile_set = ExtResource("2_0bbpv")
+
+[node name="Base" parent="YSortRoot" instance=ExtResource("5_vcsgt")]
+position = Vector2(320, 256)
+
+[node name="HighlightTileMapLayer" type="TileMapLayer" parent="."]
+modulate = Color(1, 1, 1, 0.498039)
+tile_set = ExtResource("2_rvslj")
+
+[node name="Cursor" type="Sprite2D" parent="."]
+texture = SubResource("PlaceholderTexture2D_elqb8")
+centered = false
+
+[node name="PlaceTowerButton" type="Button" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 31.0
+offset_top = -72.0
+offset_right = 147.0
+offset_bottom = -41.0
+grow_vertical = 0
+text = "Place tower
+"
+
+[node name="PlaceVillageButton" type="Button" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 192.0
+offset_top = -72.0
+offset_right = 308.0
+offset_bottom = -41.0
+grow_vertical = 0
+text = "Place village
+"
