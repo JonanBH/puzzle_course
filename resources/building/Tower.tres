@@ -5,7 +5,9 @@
 
 [resource]
 script = ExtResource("1_7ffkk")
+DisplayName = "Tower"
+ResourceCost = 4
 BuildableRadius = 3
-ResourceRadisu = 0
+ResourceRadius = 0
 BuildingScene = ExtResource("1_w36fv")
 metadata/_custom_type_script = "uid://3udgqsa6x7wg"
